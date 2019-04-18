@@ -18,3 +18,6 @@ docker run -d --net=host -v /etc/ceph:/etc/ceph -v /var/lib/ceph:/var/lib/ceph c
 
 #启动OSD服务
 docker run -d --net=host -v /etc/ceph:/etc/ceph -v/var/lib/ceph:/var/lib/ceph -v /dev/:/dev/ --pid=host --privileged=true -e OSD_DEVICE=$device -e OSD_TYPE=disk -v /run/udev:/run/udev/ ceph/daemon osd
+
+#启动rgw服务
+docker run -d --net=host -v /var/lib/ceph/:/var/lib/ceph/ -v /etc/ceph:/etc/ceph ceph/daemon rgw
