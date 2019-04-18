@@ -1,0 +1,1 @@
+修改install中的mon_ip,subnet,device为自身的值，这个是单机的最简单版本，会部署一个基于docker的集群
