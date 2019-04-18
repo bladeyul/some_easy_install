@@ -11,27 +11,10 @@ mkdir /etc/ceph
 mkdir /var/lib/ceph
 
 #启动mon服务
-docker run -d --net=host \
-　　-v /etc/ceph:/etc/ceph \
-　　-v /var/lib/ceph:/var/lib/ceph \
-　　-e MON_IP= $mon_ip \
-　　-e CEPH_PUBLIC_NETWORK= $subnet \
-　　ceph/daemon mon
+docker run -d --net=host v /etc/ceph:/etc/ceph -v /var/lib/ceph:/var/lib/ceph -e MON_IP= $mon_ip -e CEPH_PUBLIC_NETWORK= $subnet ceph/daemon mon
 
 #启动manager服务
-docker run -d --net=host \
-　　-v /etc/ceph:/etc/ceph \
-　　-v /var/lib/ceph:/var/lib/ceph \
-　　ceph/daemon mgr
+docker run -d --net=host -v /etc/ceph:/etc/ceph -v /var/lib/ceph:/var/lib/ceph ceph/daemon mgr
 
 #启动OSD服务
-docker run -d --net=host \
-　　-v /etc/ceph:/etc/ceph \
-　　-v/var/lib/ceph:/var/lib/ceph \
-　　-v /dev/:/dev/ \
-　　--pid=host \
-　　--privileged=true \
-　　-e OSD_DEVICE=$device \
-　　-e OSD_TYPE=disk \
-　　-v /run/udev:/run/udev/ \
-　　ceph/daemon osd
+docker run -d --net=host -v /etc/ceph:/etc/ceph -v/var/lib/ceph:/var/lib/ceph -v /dev/:/dev/ --pid=host --privileged=true -e OSD_DEVICE=$device -e OSD_TYPE=disk -v /run/udev:/run/udev/ ceph/daemon osd
